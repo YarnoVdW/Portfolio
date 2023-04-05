@@ -4,6 +4,13 @@ import {Avatar, Box, Heading, HStack, Pressable, Stack, Text, VStack} from 'nati
 import {HStackHomeView} from "./HStackHomeView";
 
 export const HomeView = ({navigation}) => {
+    const description = " I'm currently studying applied information technologies at KdG university in Antwerp.\n" +
+        "My skills include Java, .NET, Kotlin,..., being social and talkative.\n" +
+        "I thought myself some cyber security skills.\n" +
+        "In my spare time I developed an android game called Fire Fighter which is available on the play store!\n" +
+        "Whenever I am not studying for school you will probably find me in the woods on my mountainbike or behind my laptop learning new computer languages. At this moment I’m developing an app which will help students find out their ideal study method and give them more insight about mental health during academic year!\n" +
+        +"Please feel free to reach out to me via LinkedIn Messenger if you would like to get to know me more!";
+
     return (
         <View style={styles.container}>
             <VStack p={2}>
@@ -32,18 +39,12 @@ export const HomeView = ({navigation}) => {
                             </Text>
                         </Stack>
                         <Text fontWeight="400">
-                            Ik ben Yarno, student applicatieontwikkeling aan Karel de Grote. Al van jongs af aan ben ik
-                            heel
-                            gepassioneerd over computers. Het schrikt me dus ook niet af om in mijn vrije tijd veel bij
-                            te
-                            leren. Als je me niet achter mijn computer ziet zitten, zit ik waarschijnlijk in het bos op
-                            mijn
-                            Mountainbike.
+                            {description.slice(0, 305).concat("...")}
                         </Text>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Pressable onPress={() => alert("test alert")}>
                                 <Text color="coolGray.500" _dark={{color: "warmGray.200"}} fontWeight="400">
-                                    Lees meer...
+                                    Read more...
                                 </Text>
                             </Pressable>
                         </HStack>

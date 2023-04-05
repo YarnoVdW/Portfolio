@@ -16,7 +16,7 @@ export const HStackHomeView = ({navigation}) => {
                 boxShadow="md"
             >
                 <VStack p={6} >
-                    <Heading size="md" mb={4}>Contacteer me</Heading>
+                    <Heading size="md" mb={4}>Contact me</Heading>
                     <HStack alignItems="center">
                         <Icon mr={1} as={Ionicons} name="mail-outline" size="sm" color="gray.500"/>
                         <Link href="mailto:yarno.vandeweyer@student.kdg.be" color="gray.500"
@@ -33,7 +33,7 @@ export const HStackHomeView = ({navigation}) => {
                     </HStack>
                     <HStack alignItems="center" mt={4}>
                         <Icon mr={1} as={Ionicons} name="logo-github" size="sm" color="gray.500"/>
-                        <Link href="https://github.com/yarnovdw" color="gray.500" fontWeight="medium">yarnovdw</Link>
+                        <Link href="https://github.com/yarnovdw" color="gray.500" fontWeight="medium">YarnoVdW</Link>
                     </HStack>
                     <HStack alignItems={"center"} mt={4}>
                         <Pressable onPress={() => navigation.navigate("Projects")}>

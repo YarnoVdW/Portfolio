@@ -29,12 +29,13 @@ export const Projects =() =>{
             borderColor="gray.200"
             borderRadius={4}
             overflow="hidden"
+            backgroundColor={"coolGray.50"}
             shadow={"lg"}
-            mb={4}
+            mb={2}
             mx={2}
             style={styles.box}
         >
-            <Pressable _pressed={{bgColor:"coolGray.200"}} onPress={() => console.log(item.name)}>
+            <Pressable _pressed={{bgColor:"coolGray.200"}} onPress={() => alert(item.name)}>
                 <Box p={4}>
                     <VStack space={2}>
                         <Heading size="md" isTruncated>
@@ -53,11 +54,9 @@ export const Projects =() =>{
                                 {item.timeStamp}
                             </Text>
                             {(
-                                <Pressable onPress={() => console.log(item.description)}>
-                                    <Text fontSize="xs" color="coolGray.500">
-                                        Lees meer...
-                                    </Text>
-                                </Pressable>
+                                <Text fontSize="xs" color="coolGray.500">
+                                        Read more...
+                                </Text>
                             )}
                         </HStack>
                     </VStack>
@@ -68,16 +67,16 @@ export const Projects =() =>{
 
     return (
         <View style={styles.container}>
-            <Box >
-                <Heading fontSize="xl" p={4} pb={3}>
-                    Projecten
-                </Heading>
-                <FlatList
-                    data={projects}
-                    renderItem={renderProjectItem}
-                    keyExtractor={(item) => item.id.toString()}
-                />
-            </Box>
+                <Box >
+                    <Heading marginTop={10} fontSize="xl" p={4} pb={3}>
+                        Projecten
+                    </Heading>
+                    <FlatList
+                        data={projects}
+                        renderItem={renderProjectItem}
+                        keyExtractor={(item) => item.id.toString()}
+                    />
+                </Box>
         </View>
 
     );
@@ -91,9 +90,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#fff",
-    },
-    box: {
-        backgroundColor: "#f9fafb",
 
     }
 });

@@ -17,7 +17,7 @@ export default function App() {
               options={{headerShown: false}}
             />
             <Stack.Screen name="Projects" component={Projects} options={{animation:"fade"
-              , headerBackTitleVisible:false, headerTitle:""}}/>
+              , headerBackTitleVisible:false, headerTitle:"", headerShown:false}}/>
 
           </Stack.Navigator>
 
