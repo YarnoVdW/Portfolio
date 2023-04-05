@@ -19,7 +19,6 @@ export const Projects = () => {
         async function getProjects() {
             const data = await fetchProjects();
             setProjects(data);
-            console.log(data);
         }
 
         getProjects();
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#fff",
+
 
     }
 });

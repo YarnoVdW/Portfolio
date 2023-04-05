@@ -4,7 +4,7 @@ import {Avatar, Box, Heading, HStack, Pressable, Stack, Text, VStack} from 'nati
 import {HStackHomeView} from "./HStackHomeView";
 
 export const HomeView = ({navigation}) => {
-    const description = " I'm currently studying applied information technologies at KdG university in Antwerp.\n" +
+    const description = "I'm currently studying applied information technologies at KdG university in Antwerp.\n" +
         "My skills include Java, .NET, Kotlin,..., being social and talkative.\n" +
         "I thought myself some cyber security skills.\n" +
         "In my spare time I developed an android game called Fire Fighter which is available on the play store!\n" +
@@ -23,7 +23,7 @@ export const HomeView = ({navigation}) => {
                     _dark={{borderColor: "coolGray.600", backgroundColor: "gray.700"}}
                     _light={{backgroundColor: "gray.50"}}
                 >
-                    <Avatar marginLeft={4} marginTop={5} source={{
+                    <Avatar  marginLeft={4} marginTop={5} source={{
                         uri: "https://scontent.fbru1-1.fna.fbcdn.net/v/t39.30808-6/275046006_2880018462163135_1363094168630374256_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=nLmX689CpFEAX_ujQQx&_nc_ht=scontent.fbru1-1.fna&oh=00_AfAbEpi6wLJJYJLIrw7x6gx265sK9MiHbX854c7Ov1NyvA&oe=643176C0"
                     }} size="2xl"
                     >
@@ -39,7 +39,7 @@ export const HomeView = ({navigation}) => {
                             </Text>
                         </Stack>
                         <Text fontWeight="400">
-                            {description.slice(0, 305).concat("...")}
+                            {description.slice(0, 312).concat("...")}
                         </Text>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Pressable onPress={() => alert("test alert")}>

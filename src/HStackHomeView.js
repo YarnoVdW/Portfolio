@@ -18,24 +18,25 @@ export const HStackHomeView = ({navigation}) => {
                 <VStack p={6} >
                     <Heading size="md" mb={4}>Contact me</Heading>
                     <HStack alignItems="center">
-                        <Icon mr={1} as={Ionicons} name="mail-outline" size="sm" color="gray.500"/>
+                        <Icon mr={1} as={Ionicons} name="mail-outline" size="sm" color="green.500"/>
                         <Link href="mailto:yarno.vandeweyer@student.kdg.be" color="gray.500"
                               fontWeight="medium">yarno.vandeweyer@student.kdg.be</Link>
                     </HStack>
                     <HStack alignItems="center" mt={4}>
-                        <Icon mr={1} as={Ionicons} name="phone-portrait-outline" size="sm" color="gray.500"/>
+                        <Icon mr={1} as={Ionicons} name="phone-portrait-outline" size="sm" color="red.500"/>
                         <Text color="gray.500" fontWeight="medium">+32 484 52 4024</Text>
                     </HStack>
                     <HStack alignItems="center" mt={4}>
-                        <Icon mr={1} as={Ionicons} name="logo-linkedin" size="sm" color="linkedin.500"/>
+                        <Icon mr={1} as={Ionicons} name="logo-linkedin" size="sm" color={"blue.500"}/>
                         <Link href="https://www.linkedin.com/in/yarno-van-de-weyer-069986232/" color="linkedin.500"
                               fontWeight="medium">Yarno Van de Weyer</Link>
                     </HStack>
                     <HStack alignItems="center" mt={4}>
-                        <Icon mr={1} as={Ionicons} name="logo-github" size="sm" color="gray.500"/>
+                        <Icon mr={1} as={Ionicons} name="logo-github" size="sm" color="black"/>
                         <Link href="https://github.com/yarnovdw" color="gray.500" fontWeight="medium">YarnoVdW</Link>
                     </HStack>
                     <HStack alignItems={"center"} mt={4}>
+                        <Icon mr={1} as={Ionicons} name={"bug-outline"} size={"sm"} color={"purple.400"}/>
                         <Pressable onPress={() => navigation.navigate("Projects")}>
                             <Text color="gray.500" fontWeight="medium"  textDecorationLine="underline">
                                 Check out some of my projects!
