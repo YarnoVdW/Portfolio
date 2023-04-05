@@ -12,7 +12,8 @@ async function fetchProjects() {
         console.log(error)
     }
 }
-export const Projects =() =>{
+
+export const Projects = () => {
     const [projects, setProjects] = useState([]);
     useEffect(() => {
         async function getProjects() {
@@ -20,9 +21,10 @@ export const Projects =() =>{
             setProjects(data);
             console.log(data);
         }
+
         getProjects();
     }, []);
-    const renderProjectItem = ({ item }) => (
+    const renderProjectItem = ({item}) => (
 
         <Box
             borderWidth={1}
@@ -35,27 +37,24 @@ export const Projects =() =>{
             mx={2}
             style={styles.box}
         >
-            <Pressable _pressed={{bgColor:"coolGray.200"}} onPress={() => alert(item.name)}>
+            <Pressable _pressed={{bgColor: "coolGray.200"}} onPress={() => alert(item.name)}>
                 <Box p={4}>
                     <VStack space={2}>
                         <Heading size="md" isTruncated>
                             {item.name}
                         </Heading>
                         <Text color="coolGray.600" isTruncated>
-                            {item.description == null? "" : item.description.length > 50
-                                ? `${item.description.slice(0, 50)}...`
+                            {item.description == null ? "" : item.description.length > 50
+                                ? `${item.description.slice(0, 100)}...`
                                 : item.description}
                         </Text>
-                        <Text style={styles.textLanguage}>
-                            {item.language}
-                        </Text>
                         <HStack justifyContent="space-between">
-                            <Text fontSize="xs" color="coolGray.500">
-                                {item.timeStamp}
+                            <Text fontSize="xs" style={styles.textLanguage}>
+                                {item.language == null ? "" : item.language}
                             </Text>
                             {(
                                 <Text fontSize="xs" color="coolGray.500">
-                                        Read more...
+                                    Read more...
                                 </Text>
                             )}
                         </HStack>
@@ -67,18 +66,17 @@ export const Projects =() =>{
 
     return (
         <View style={styles.container}>
-                <Box >
-                    <Heading marginTop={10} fontSize="xl" p={4} pb={3}>
-                        Projecten
-                    </Heading>
-                    <FlatList
-                        data={projects}
-                        renderItem={renderProjectItem}
-                        keyExtractor={(item) => item.id.toString()}
-                    />
-                </Box>
+            <Box>
+                <Heading marginTop={10} fontSize="xl" p={4} pb={3}>
+                    Projecten
+                </Heading>
+                <FlatList
+                    data={projects}
+                    renderItem={renderProjectItem}
+                    keyExtractor={(item) => item.id.toString()}
+                />
+            </Box>
         </View>
-
     );
 };
 const styles = StyleSheet.create({
