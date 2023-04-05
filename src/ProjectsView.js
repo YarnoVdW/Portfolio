@@ -55,7 +55,7 @@ export const Projects =() =>{
                             {(
                                 <Pressable onPress={() => console.log(item.description)}>
                                     <Text fontSize="xs" color="coolGray.500">
-                                        Read More
+                                        Lees meer...
                                     </Text>
                                 </Pressable>
                             )}
@@ -70,7 +70,7 @@ export const Projects =() =>{
         <View style={styles.container}>
             <Box >
                 <Heading fontSize="xl" p={4} pb={3}>
-                    Projects
+                    Projecten
                 </Heading>
                 <FlatList
                     data={projects}
