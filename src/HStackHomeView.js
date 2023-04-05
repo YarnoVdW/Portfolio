@@ -52,7 +52,5 @@ export const HStackHomeView = ({navigation}) => {
                 </VStack>
             </Box>
         </HStack>
-
-
     );
 }

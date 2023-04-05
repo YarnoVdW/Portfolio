@@ -1,7 +1,5 @@
-import { StyleSheet} from 'react-native';
 import {NativeBaseProvider} from "native-base";
 import {HomeView} from "./src/HomeView";
-
 import {NavigationContainer} from "@react-navigation/native";
 import React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
@@ -27,21 +25,3 @@ export default function App() {
       </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  boxTest: {
-    flex:1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-
-  }
-});

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from "react-native";
-import {Pressable,Avatar, Box, FlatList, Heading, HStack, Spacer, VStack} from "native-base";
+import {Pressable, Box, FlatList, Heading, HStack, VStack} from "native-base";
 import {useEffect, useState} from "react";
 
 
