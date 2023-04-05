@@ -1,5 +1,5 @@
-import {Pressable, Text} from "react-native";
-import {Avatar, Box, FlatList, Heading, HStack, Spacer, VStack} from "native-base";
+import {StyleSheet, Text, View} from "react-native";
+import {Pressable,Avatar, Box, FlatList, Heading, HStack, Spacer, VStack} from "native-base";
 import {useEffect, useState} from "react";
 
 
@@ -18,10 +18,12 @@ export const Projects =() =>{
         async function getProjects() {
             const data = await fetchProjects();
             setProjects(data);
+            console.log(data);
         }
         getProjects();
     }, []);
     const renderProjectItem = ({ item }) => (
+
         <Box
             borderWidth={1}
             borderColor="gray.200"
@@ -30,8 +32,9 @@ export const Projects =() =>{
             shadow={"lg"}
             mb={4}
             mx={2}
+            style={styles.box}
         >
-            <Pressable onPress={() => console.log(item.name)}>
+            <Pressable _pressed={{bgColor:"coolGray.200"}} onPress={() => console.log(item.name)}>
                 <Box p={4}>
                     <VStack space={2}>
                         <Heading size="md" isTruncated>
@@ -42,13 +45,16 @@ export const Projects =() =>{
                                 ? `${item.description.slice(0, 50)}...`
                                 : item.description}
                         </Text>
+                        <Text style={styles.textLanguage}>
+                            {item.language}
+                        </Text>
                         <HStack justifyContent="space-between">
                             <Text fontSize="xs" color="coolGray.500">
                                 {item.timeStamp}
                             </Text>
                             {(
                                 <Pressable onPress={() => console.log(item.description)}>
-                                    <Text fontSize="xs" color="primary.500">
+                                    <Text fontSize="xs" color="coolGray.500">
                                         Read More
                                     </Text>
                                 </Pressable>
@@ -61,15 +67,33 @@ export const Projects =() =>{
     );
 
     return (
-        <Box>
-            <Heading fontSize="xl" p={4} pb={3}>
-                Projects
-            </Heading>
-            <FlatList
-                data={projects}
-                renderItem={renderProjectItem}
-                keyExtractor={(item) => item.id.toString()}
-            />
-        </Box>
+        <View style={styles.container}>
+            <Box >
+                <Heading fontSize="xl" p={4} pb={3}>
+                    Projects
+                </Heading>
+                <FlatList
+                    data={projects}
+                    renderItem={renderProjectItem}
+                    keyExtractor={(item) => item.id.toString()}
+                />
+            </Box>
+        </View>
+
     );
 };
+const styles = StyleSheet.create({
+    textLanguage: {
+        color: "#8b5cf6"
+    },
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#fff",
+    },
+    box: {
+        backgroundColor: "#f9fafb",
+
+    }
+});
