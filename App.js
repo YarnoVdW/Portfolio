@@ -1,13 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text } from 'react-native';
-import {NativeBaseProvider, Box, View, Heading, HStack, Stack, Center, AspectRatio, Container} from "native-base";
+import { StyleSheet, Text, View } from 'react-native';
+import {NativeBaseProvider, Box, Heading, HStack, Center, AspectRatio, Container} from "native-base";
+import {HomeView} from "./src/HomeView";
+
+import {NavigationContainer} from "@react-navigation/native";
+import React from "react";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {Projects} from "./src/ProjectsView";
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NativeBaseProvider>
+      <NavigationContainer>
+        <NativeBaseProvider>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeView}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen name="Projects" component={Projects}/>
 
+          </Stack.Navigator>
 
-    </NativeBaseProvider>
+        </NativeBaseProvider>
+      </NavigationContainer>
   );
 }
 
@@ -22,6 +39,9 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+
   }
 });
