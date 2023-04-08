@@ -1,21 +1,22 @@
-import {NativeBaseProvider} from "native-base";
+import {NativeBaseProvider, StatusBar} from "native-base";
 import {HomeView} from "./src/HomeView";
 import {NavigationContainer} from "@react-navigation/native";
 import React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Projects} from "./src/ProjectsView";
-import {ImageBackground} from "react-native";
-
 const Stack = createNativeStackNavigator();
 const image = require('./assets/background2.jpeg');
 export default function App() {
     console.log(image);
     return (
         <NavigationContainer>
-
+            <StatusBar
+                translucent
+                backgroundColor="rgba(0, 0, 0, 0.2)"
+                barStyle="dark-content"
+            />
             <NativeBaseProvider>
-
-                <Stack.Navigator >
+                <Stack.Navigator>
                     <Stack.Screen
                         name="Home"
                         component={HomeView}
@@ -29,9 +30,7 @@ export default function App() {
                         headerShown: false
                     }}/>
                 </Stack.Navigator>
-
             </NativeBaseProvider>
-
         </NavigationContainer>
     );
 }
