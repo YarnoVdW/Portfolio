@@ -1,16 +1,70 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Avatar, Box, Heading, HStack, Pressable, Stack, Text, VStack} from 'native-base';
+import {
+    Avatar,
+    Box,
+    Heading,
+    HStack,
+    Button,
+    Pressable,
+    Stack,
+    Text,
+    VStack,
+    Modal,
+    Center,
+    FormControl,
+    Input
+} from 'native-base';
 import {HStackHomeView} from "./HStackHomeView";
 
 export const HomeView = ({navigation}) => {
+
     const description = "I'm currently studying applied information technologies at KdG university in Antwerp.\n" +
         "My skills include Java, .NET, Kotlin,..., being social and talkative.\n" +
         "I thought myself some cyber security skills.\n" +
         "In my spare time I developed an android game called Fire Fighter which is available on the play store!\n" +
-        "Whenever I am not studying for school you will probably find me in the woods on my mountainbike or behind my laptop learning new computer languages. At this moment I’m developing an app which will help students find out their ideal study method and give them more insight about mental health during academic year!\n" +
+        "Whenever I am not studying for school you will probably find me in the woods on my mountainbike or behind my laptop learning new computer languages." +
+        "At this moment I’m developing an app which will help students find out their ideal study method and give them more insight about mental health during academic year!\n" +
         +"Please feel free to reach out to me via LinkedIn Messenger if you would like to get to know me more!";
 
+    const skillset = "• ASP.NET Core (MVC and Web API)\n• Entity Framework Core\n• React Native\n"+
+    "• Java\n• Kotlin (Android studio)\n• JavaScript\n• C#\n• Python\n• C\n• ...";
+    const [showModal, setShowModal] = useState(false);
+    const  showModalHome = () => {
+        return <Center>
+            <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                <Modal.Content>
+                    <Modal.CloseButton />
+                    <Modal.Header>More about me</Modal.Header>
+                    <Modal.Body>
+                        <Stack space={3}>
+                            <Heading size="md">
+                                Yarno Van de Weyer
+                            </Heading>
+                            <Stack space={1}>
+                                <Text fontSize="sm" _light={{color: "violet.500"}} _dark={{color: "violet.300"}}
+                                      fontWeight="500">
+                                    Full-stack Developer in training
+                                </Text>
+                                <Text fontSize="xs" _light={{color: "tertiary.500"}} _dark={{color: "tertiary.300"}}
+                                      fontWeight="500">
+                                    Studant vzw | Karel de Grote Hogeschool
+                                </Text>
+                            </Stack>
+                        </Stack>
+                        <Stack marginTop={2} space={2}>
+                            <Heading underline={true} size="md" fontWeight="400">
+                                Skills
+                            </Heading>
+                            <Text>
+                                {skillset}
+                            </Text>
+                        </Stack>
+                    </Modal.Body>
+                </Modal.Content>
+            </Modal>
+        </Center>;
+    }
     return (
         <View style={styles.container}>
             <VStack p={2}>
@@ -42,17 +96,17 @@ export const HomeView = ({navigation}) => {
                             {description.slice(0, 312).concat("...")}
                         </Text>
                         <HStack alignItems="center" justifyContent="space-between">
-                            <Pressable onPress={() => alert("test alert")}>
+                            <Pressable onPress={() => setShowModal(true)}>
                                 <Text color="coolGray.500" _dark={{color: "warmGray.200"}} fontWeight="400">
                                     Read more...
                                 </Text>
+                                {showModal && showModalHome()}
                             </Pressable>
                         </HStack>
                     </Stack>
                 </Box>
                 <HStackHomeView navigation={navigation}/>
             </VStack>
-
         </View>
     );
 };

@@ -1,30 +1,29 @@
 import {StyleSheet, Text, View} from "react-native";
-import {Pressable, Box, FlatList, Heading, HStack, VStack} from "native-base";
+import {Box, FlatList, Heading, HStack, Pressable, VStack} from "native-base";
 import {useEffect, useState} from "react";
 
 
 async function fetchProjects() {
     try {
         const response = await fetch("https://api.github.com/users/yarnoVdW/repos");
-        const data = (await response).json();
-        return data;
+        return (await response).json();
     } catch (error) {
         console.log(error)
     }
 }
 
 export const Projects = () => {
+
     const [projects, setProjects] = useState([]);
     useEffect(() => {
         async function getProjects() {
             const data = await fetchProjects();
             setProjects(data);
         }
-
         getProjects();
     }, []);
-    const renderProjectItem = ({item}) => (
 
+    const renderProjectItem = ({item}) => (
         <Box
             borderWidth={1}
             borderColor="gray.200"
@@ -34,8 +33,7 @@ export const Projects = () => {
             shadow={"lg"}
             mb={2}
             mx={2}
-            style={styles.box}
-        >
+            style={styles.box}>
             <Pressable _pressed={{bgColor: "coolGray.200"}} onPress={() => alert(item.name)}>
                 <Box p={4}>
                     <VStack space={2}>
@@ -67,7 +65,7 @@ export const Projects = () => {
         <View style={styles.container}>
             <Box>
                 <Heading marginTop={10} fontSize="xl" p={4} pb={3}>
-                    Projecten
+                    Projects
                 </Heading>
                 <FlatList
                     data={projects}
@@ -86,7 +84,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-
-
+        backgroundColor: "#fff",
     }
 });
