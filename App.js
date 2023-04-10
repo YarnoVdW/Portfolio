@@ -5,9 +5,7 @@ import React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Projects} from "./src/ProjectsView";
 const Stack = createNativeStackNavigator();
-const image = require('./assets/background2.jpeg');
 export default function App() {
-    console.log(image);
     return (
         <NavigationContainer>
             <StatusBar

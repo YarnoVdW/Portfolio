@@ -5,15 +5,12 @@ import {
     Box,
     Heading,
     HStack,
-    Button,
     Pressable,
     Stack,
     Text,
     VStack,
     Modal,
-    Center,
-    FormControl,
-    Input
+    Center
 } from 'native-base';
 import {HStackHomeView} from "./HStackHomeView";
 

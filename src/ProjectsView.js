@@ -1,5 +1,5 @@
 import {Animated, StyleSheet, Text, useColorScheme} from "react-native";
-import {Box, Heading, HStack, Pressable, useColorMode, VStack, View} from "native-base";
+import {Box, Heading, HStack, Pressable, VStack, View} from "native-base";
 import React, {useEffect, useState} from "react";
 
 async function fetchProjects() {
@@ -27,12 +27,13 @@ export const Projects = () => {
             const data = await fetchProjects();
             setProjects(data);
         }
+
         getProjects();
     }, []);
 
     const renderProjectItem = ({item, index}) => {
         const inputRange = [-1, 0, index * 150, (index + 2) * 150];
-        const outputRange =  [1, 1, 1, 0];
+        const outputRange = [1, 1, 1, 0];
         const scale = scrollY.interpolate({
             inputRange,
             outputRange: outputRange,
@@ -57,7 +58,7 @@ export const Projects = () => {
                     transform: [{scale}],
                     margin: 10,
                     shadowColor: "#000",
-                    shadowOffset: {width: 0, height:10},
+                    shadowOffset: {width: 0, height: 10},
                     shadowRadius: 20
                 }}
             >

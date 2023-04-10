@@ -1,4 +1,4 @@
-import {Box, Button, Heading, HStack, Icon, Link, Pressable, Stack, Text, VStack} from "native-base";
+import {Box, Heading, HStack, Icon, Link, Pressable, Stack, Text, VStack} from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
 
