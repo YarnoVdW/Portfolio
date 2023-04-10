@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from "react-native";
-import {Box, FlatList, Heading, HStack, Pressable, VStack} from "native-base";
-import {useEffect, useState} from "react";
+import {Animated, StyleSheet, Text} from "react-native";
+import {Box, FlatList, Heading, HStack, Pressable, useColorMode, VStack, View} from "native-base";
+import React, {useEffect, useState} from "react";
 
 
 async function fetchProjects() {
@@ -13,6 +13,13 @@ async function fetchProjects() {
 }
 
 export const Projects = () => {
+    const { colorMode } = useColorMode();
+    const backgroundColor = colorMode === 'light' ? 'coolGray.800' : '#fff';
+    console.log(backgroundColor);
+
+    const scrollY = React.useRef(new Animated.Value(0)).current;
+
+    const AnimatedBox = Animated.createAnimatedComponent(Box);
 
     const [projects, setProjects] = useState([]);
     useEffect(() => {
@@ -23,54 +30,68 @@ export const Projects = () => {
         getProjects();
     }, []);
 
-    const renderProjectItem = ({item}) => (
-        <Box
-            borderWidth={1}
-            borderColor="gray.200"
-            borderRadius={4}
-            overflow="hidden"
-            backgroundColor={"coolGray.50"}
-            shadow={"lg"}
-            mb={2}
-            mx={2}
-            style={styles.box}>
-            <Pressable _pressed={{bgColor: "coolGray.200"}} onPress={() => alert(item.name)}>
-                <Box p={4}>
-                    <VStack space={2}>
-                        <Heading size="md" isTruncated>
-                            {item.name}
-                        </Heading>
-                        <Text color="coolGray.600" isTruncated>
-                            {item.description == null ? "" : item.description.length > 50
-                                ? `${item.description.slice(0, 100)}...`
-                                : item.description}
-                        </Text>
-                        <HStack justifyContent="space-between">
-                            <Text fontSize="xs" style={styles.textLanguage}>
-                                {item.language == null ? "" : item.language}
+
+    const renderProjectItem = ({item, index}) => {
+        const inputRange = [-1, 0, index * 150, (index + 2) * 150];
+        const scale = scrollY.interpolate({
+            inputRange,
+            outputRange: [1,1,1,0],
+            extrapolate: 'clamp',
+        });
+
+        return (
+            <AnimatedBox
+                borderWidth={1}
+                borderRadius={20}
+                overflow="hidden"
+                backgroundColor={"coolGray.50"}
+                borderColor={"coolGray.200"}
+                shadow={"lg"}
+                style={{
+                    transform: [{scale}],
+                    margin: 10,
+                    shadowColor: "#000",
+                    shadowOffset: {width: 0, height:10},
+                    shadowRadius: 20
+                }}
+            >
+                <Pressable _pressed={{bgColor: "coolGray.200"}} onPress={() => alert(item.name)}>
+                    <Box p={4}>
+                        <VStack space={2}>
+                            <Heading size="md" isTruncated>
+                                {item.name}
+                            </Heading>
+                            <Text color="coolGray.600" isTruncated>
+                                {item.description == null ? "" : item.description.length > 50
+                                    ? `${item.description.slice(0, 100)}...`
+                                    : item.description}
                             </Text>
-                            {(
-                                <Text fontSize="xs" color="coolGray.500">
-                                    Read more...
+                            <HStack justifyContent="space-between">
+                                <Text fontSize="xs" style={styles.textLanguage}>
+                                    {item.language == null ? "" : item.language}
                                 </Text>
-                            )}
-                        </HStack>
-                    </VStack>
-                </Box>
-            </Pressable>
-        </Box>
-    );
+                                {(
+                                    <Text fontSize="xs" color="coolGray.500">
+                                        Read more...
+                                    </Text>
+                                )}
+                            </HStack>
+                        </VStack>
+                    </Box>
+                </Pressable>
+            </AnimatedBox>
+        );
+    }
 
     return (
-        <View style={styles.container}>
-            <Box>
-                <Heading marginTop={10} fontSize="xl" p={4} pb={3}>
-                    Projects
-                </Heading>
-                <FlatList
+        <View styles={{backgroundColor}}>
+            <Box marginTop={10}>
+                <Animated.FlatList
                     data={projects}
                     renderItem={renderProjectItem}
                     keyExtractor={(item) => item.id.toString()}
+                    onScroll={Animated.event([{nativeEvent: {contentOffset: {y: scrollY}}}],
+                        {useNativeDriver: true})}
                 />
             </Box>
         </View>
@@ -80,10 +101,4 @@ const styles = StyleSheet.create({
     textLanguage: {
         color: "#8b5cf6"
     },
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#fff",
-    }
 });
