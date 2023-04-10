@@ -1,22 +1,22 @@
-import {Animated, StyleSheet, Text} from "react-native";
-import {Box, FlatList, Heading, HStack, Pressable, useColorMode, VStack, View} from "native-base";
+import {Animated, StyleSheet, Text, useColorScheme} from "react-native";
+import {Box, Heading, HStack, Pressable, useColorMode, VStack, View} from "native-base";
 import React, {useEffect, useState} from "react";
 
-
 async function fetchProjects() {
+
     try {
         const response = await fetch("https://api.github.com/users/yarnoVdW/repos");
         return (await response).json();
     } catch (error) {
         console.log(error)
     }
+
 }
 
 export const Projects = () => {
-    const { colorMode } = useColorMode();
-    const backgroundColor = colorMode === 'light' ? 'coolGray.800' : '#fff';
-    console.log(backgroundColor);
-
+    const colorMode = useColorScheme();
+    const backgroundColor = colorMode === 'light' ? 'coolGray.50' : 'coolGray.300';
+    console.log(colorMode);
     const scrollY = React.useRef(new Animated.Value(0)).current;
 
     const AnimatedBox = Animated.createAnimatedComponent(Box);
@@ -30,23 +30,29 @@ export const Projects = () => {
         getProjects();
     }, []);
 
-
     const renderProjectItem = ({item, index}) => {
         const inputRange = [-1, 0, index * 150, (index + 2) * 150];
+        const outputRange =  [1, 1, 1, 0];
         const scale = scrollY.interpolate({
             inputRange,
-            outputRange: [1,1,1,0],
+            outputRange: outputRange,
             extrapolate: 'clamp',
         });
+
+        const opacity = scrollY.interpolate({
+            inputRange: [-1, 0, index * 150, (index + 1) * 150],
+            outputRange: outputRange
+        })
 
         return (
             <AnimatedBox
                 borderWidth={1}
                 borderRadius={20}
                 overflow="hidden"
-                backgroundColor={"coolGray.50"}
                 borderColor={"coolGray.200"}
+                backgroundColor={backgroundColor}
                 shadow={"lg"}
+                opacity={opacity}
                 style={{
                     transform: [{scale}],
                     margin: 10,
@@ -71,7 +77,7 @@ export const Projects = () => {
                                     {item.language == null ? "" : item.language}
                                 </Text>
                                 {(
-                                    <Text fontSize="xs" color="coolGray.500">
+                                    <Text fontSize="xs" style={{color: "#6b7280"}}>
                                         Read more...
                                     </Text>
                                 )}
