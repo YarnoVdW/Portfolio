@@ -1,10 +1,13 @@
-import {NativeBaseProvider, StatusBar} from "native-base";
+import {NativeBaseProvider, Spinner, StatusBar} from "native-base";
 import {HomeView} from "./src/HomeView";
-import {NavigationContainer} from "@react-navigation/native";
 import React from "react";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Projects} from "./src/ProjectsView";
-const Stack = createNativeStackNavigator();
+import {ProjectDetails} from "./src/ProjectDetails";
+import {NavigationContainer} from "@react-navigation/native";
+import {createSharedElementStackNavigator} from "react-navigation-shared-element";
+
+
+const Stack = createSharedElementStackNavigator();
 export default function App() {
     return (
         <NavigationContainer>
@@ -20,13 +23,44 @@ export default function App() {
                         component={HomeView}
                         options={{headerShown: false}}
                     />
-                    <Stack.Screen name="Projects" component={Projects} options={{
-                        animation: "fade"
-                        ,
-                        headerBackTitleVisible: false,
-                        headerTitle: "",
-                        headerShown: false
+                    <Stack.Screen
+                        name="Projects"
+                        component={Projects}
+                        options={{
+                            animation: "fade",
+                            headerBackTitleVisible: false,
+                            headerTitle: "",
+                            headerShown: false
                     }}/>
+                    <Stack.Screen
+                        name="ProjectDetails"
+                        component={ProjectDetails}
+                        options={{
+                            headerBackTitleVisible: false,
+                            headerTitle: "",
+                            headerShown: false,
+                        }}
+                        sharedElements={(route, otherRoute, showing) => {
+                            const { item } = route.params;
+                            return [
+                                {
+                                    id:`item.${item.name}.name`,
+                                    animation: 'move'
+                                },
+                                {
+                                    id:`item.${item.description}.description`,
+                                    animation: 'move'
+                                },
+                                {
+                                    id:`item.${item.language}.language`,
+                                    animation: 'move'
+                                },
+                                {
+                                    id:`general.bg`,
+                                    animation: 'move'
+                                },
+                            ];
+                        }}/>
                 </Stack.Navigator>
             </NativeBaseProvider>
         </NavigationContainer>

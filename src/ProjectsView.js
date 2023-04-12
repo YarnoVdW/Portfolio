@@ -1,7 +1,9 @@
-import {Animated, StyleSheet, Text, useColorScheme} from "react-native";
-import {Box, Heading, HStack, Pressable, VStack, View} from "native-base";
+import {Animated, Dimensions, StyleSheet, Text, useColorScheme} from "react-native";
+import {Box, Heading, HStack, Pressable, VStack, View, Spinner} from "native-base";
 import React, {useEffect, useState} from "react";
+import {SharedElement} from "react-navigation-shared-element";
 
+const {width, height} = Dimensions.get('window');
 async function fetchProjects() {
 
     try {
@@ -13,13 +15,12 @@ async function fetchProjects() {
 
 }
 
-export const Projects = () => {
+export const Projects = ({navigation}) => {
     const colorMode = useColorScheme();
     const backgroundColor = colorMode === 'light' ? 'coolGray.50' : 'coolGray.300';
     console.log(colorMode);
     const scrollY = React.useRef(new Animated.Value(0)).current;
-
-    const AnimatedBox = Animated.createAnimatedComponent(Box);
+    const AnimatedView = Animated.createAnimatedComponent(View);
 
     const [projects, setProjects] = useState([]);
     useEffect(() => {
@@ -32,6 +33,7 @@ export const Projects = () => {
     }, []);
 
     const renderProjectItem = ({item, index}) => {
+        let startNode;
         const inputRange = [-1, 0, index * 150, (index + 2) * 150];
         const outputRange = [1, 1, 1, 0];
         const scale = scrollY.interpolate({
@@ -46,47 +48,54 @@ export const Projects = () => {
         })
 
         return (
-            <AnimatedBox
-                borderWidth={1}
-                borderRadius={20}
-                overflow="hidden"
-                borderColor={"coolGray.200"}
-                backgroundColor={backgroundColor}
-                shadow={"lg"}
-                opacity={opacity}
-                style={{
-                    transform: [{scale}],
-                    margin: 10,
-                    shadowColor: "#000",
-                    shadowOffset: {width: 0, height: 10},
-                    shadowRadius: 20
-                }}
-            >
-                <Pressable _pressed={{bgColor: "coolGray.200"}} onPress={() => alert(item.name)}>
-                    <Box p={4}>
-                        <VStack space={2}>
+            <Pressable _pressed={{bgColor: "coolGray.200"}} onPress={() => navigation.navigate('ProjectDetails', { item })}>
+                <AnimatedView
+                    borderWidth={1}
+                    borderRadius={20}
+                    overflow="hidden"
+                    borderColor={"coolGray.200"}
+                    backgroundColor={backgroundColor}
+                    shadow={"lg"}
+                    height={height / 6}
+                    width={width - 20}
+                    opacity={opacity}
+                    style={{
+                        transform: [{ scale }],
+                        marginBottom: 10,
+                        marginLeft: 10,
+                        marginRight: 10,
+                        marginTop: 10
+                    }}
+                >
+                    <VStack space={2} p={4}>
+                        <SharedElement id={`item.${item.name}.name`}>
                             <Heading size="md" isTruncated>
                                 {item.name}
                             </Heading>
+                        </SharedElement>
+                        <SharedElement id={`item.${item.description}.description`}>
                             <Text color="coolGray.600" isTruncated>
                                 {item.description == null ? "" : item.description.length > 50
                                     ? `${item.description.slice(0, 100)}...`
                                     : item.description}
                             </Text>
-                            <HStack justifyContent="space-between">
+                        </SharedElement>
+                        <HStack justifyContent="space-between">
+                            <SharedElement id={`item.${item.language}.language`}>
                                 <Text fontSize="xs" style={styles.textLanguage}>
                                     {item.language == null ? "" : item.language}
                                 </Text>
-                                {(
-                                    <Text fontSize="xs" style={{color: "#6b7280"}}>
-                                        Read more...
-                                    </Text>
-                                )}
-                            </HStack>
-                        </VStack>
-                    </Box>
-                </Pressable>
-            </AnimatedBox>
+                            </SharedElement>
+                            {(
+                                <Text fontSize="xs" style={{ color: "#6b7280" }}>
+                                    Read more...
+                                </Text>
+                            )}
+                        </HStack>
+                    </VStack>
+                </AnimatedView>
+            </Pressable>
+
         );
     }
 
@@ -101,6 +110,12 @@ export const Projects = () => {
                         {useNativeDriver: true})}
                 />
             </Box>
+            <SharedElement id={`general.bg`}>
+                <View backgroundColor={"coolGray.300"} borderRadius={20} width={width} height={height}
+                      position={"absolute"}
+                      style={{transform: [{translateY: height}]}}/>
+            </SharedElement>
+
         </View>
     );
 };
