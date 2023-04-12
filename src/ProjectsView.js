@@ -33,7 +33,6 @@ export const Projects = ({navigation}) => {
     }, []);
 
     const renderProjectItem = ({item, index}) => {
-        let startNode;
         const inputRange = [-1, 0, index * 150, (index + 2) * 150];
         const outputRange = [1, 1, 1, 0];
         const scale = scrollY.interpolate({
