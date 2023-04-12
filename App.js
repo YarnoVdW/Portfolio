@@ -1,11 +1,10 @@
-import {NativeBaseProvider, Spinner, StatusBar} from "native-base";
+import {NativeBaseProvider, StatusBar} from "native-base";
 import {HomeView} from "./src/HomeView";
 import React from "react";
 import {Projects} from "./src/ProjectsView";
 import {ProjectDetails} from "./src/ProjectDetails";
 import {NavigationContainer} from "@react-navigation/native";
 import {createSharedElementStackNavigator} from "react-navigation-shared-element";
-
 
 const Stack = createSharedElementStackNavigator();
 export default function App() {
@@ -39,6 +38,8 @@ export default function App() {
                             headerBackTitleVisible: false,
                             headerTitle: "",
                             headerShown: false,
+                            animation: "fade",
+
                         }}
                         sharedElements={(route, otherRoute, showing) => {
                             const { item } = route.params;

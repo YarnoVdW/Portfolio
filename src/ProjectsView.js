@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {SharedElement} from "react-navigation-shared-element";
 
 const {width, height} = Dimensions.get('window');
+console.log(height);
 async function fetchProjects() {
 
     try {
@@ -33,7 +34,7 @@ export const Projects = ({navigation}) => {
     }, []);
 
     const renderProjectItem = ({item, index}) => {
-        const inputRange = [-1, 0, index * 150, (index + 2) * 150];
+        const inputRange = [-1, 0, index * (height/6), (index + 2) * (height/6)];
         const outputRange = [1, 1, 1, 0];
         const scale = scrollY.interpolate({
             inputRange,
@@ -120,6 +121,7 @@ export const Projects = ({navigation}) => {
 };
 const styles = StyleSheet.create({
     textLanguage: {
-        color: "#8b5cf6"
+        color: "#8b5cf6",
+        position: 'absolute',
     },
 });
